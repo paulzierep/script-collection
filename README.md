@@ -22,8 +22,32 @@ mamba --version
 mamba env create -f environment.yml
 ```
 
+#### Acivate the environment
 
+```bash
+conda activate script-collection
+```
 
-### Enviromnent Vars
+### Get environment variables permanently into the conda env 
 
-The scripts require
+Add environment vars to .env
+
+```bash
+GALAXY_URL=https://usegalaxy.eu
+GALAXY_API_KEY=<your key>
+```
+
+Add permanently to conda
+
+```bash
+# For each line in .env
+while IFS='=' read -r key value; do
+    # skip empty lines or comments
+    [[ -z "$key" || "$key" == \#* ]] && continue
+    conda env config vars set "$key=$value"
+done < .env
+
+conda deactivate
+conda activate script-collection
+conda env config vars list
+```
