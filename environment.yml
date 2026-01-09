@@ -1,0 +1,10 @@
+name: script-collection
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - bioblend
+  - requests
+  - pandas
+
